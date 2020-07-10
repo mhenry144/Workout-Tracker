@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
+let PORT = process.env.PORT || 8080;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "/public")));
@@ -27,4 +28,6 @@ mongoose.connect(
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
-app.listen(5000);
+app.listen(PORT, function () {
+  console.log("Express server started at port: http://localhost:" + PORT);
+});
